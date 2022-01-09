@@ -1,12 +1,12 @@
-import { useQuery } from "react-query";
-import { useParams } from "react-router";
-import { fetchCoinHistory } from "../api";
-import ApexChart from "react-apexcharts";
-import { theme } from "../theme";
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router';
+import { fetchCoinHistory } from '../api';
+import ApexChart from 'react-apexcharts';
+import { darkTheme } from '../theme';
 
 interface CoinHistoryData {
-  time_open: "string";
-  time_close: "string";
+  time_open: 'string';
+  time_close: 'string';
   open: number;
   close: number;
   high: number;
@@ -18,7 +18,7 @@ interface CoinHistoryData {
 function Chart() {
   const { coinId } = useParams();
   const { isLoading, data } = useQuery<CoinHistoryData[]>(
-    ["ohlcv", coinId],
+    ['ohlcv', coinId],
     () => fetchCoinHistory(coinId!),
     {
       refetchInterval: 10000,
@@ -27,28 +27,28 @@ function Chart() {
   return (
     <div>
       {isLoading ? (
-        "Loading chart..."
+        'Loading chart...'
       ) : (
         <ApexChart
-          type="line"
+          type='line'
           series={[
             {
-              name: "Price",
+              name: 'Price',
               data: data?.map((price) => price.close),
             },
           ]}
           options={{
             theme: {
-              mode: "dark",
+              mode: 'dark',
             },
-            colors: [`${theme.accentColor}`],
+            colors: [`${darkTheme.accentColor}`],
             chart: {
               height: 300,
               width: 500,
-              background: "transparent",
+              background: 'transparent',
             },
             stroke: {
-              curve: "stepline",
+              curve: 'stepline',
               width: 3,
             },
             yaxis: {
@@ -62,15 +62,15 @@ function Chart() {
                 show: false,
               },
               axisBorder: {
-                color: `${theme.accentColor2}`,
+                color: `${darkTheme.accentColor2}`,
               },
-              type: "datetime",
+              type: 'datetime',
               categories: data?.map((price) => price.time_close.slice(0, 10)),
             },
             fill: {
-              type: "gradient",
+              type: 'gradient',
               gradient: {
-                gradientToColors: [`${theme.accentColor2}`],
+                gradientToColors: [`${darkTheme.accentColor2}`],
                 stops: [0, 100],
               },
             },

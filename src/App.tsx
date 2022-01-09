@@ -1,6 +1,7 @@
-import { createGlobalStyle } from "styled-components";
-import Router from "./Router";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Router from './Router';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { darkTheme } from './theme';
 
 // reset styles
 const GlobalStyle = createGlobalStyle`
@@ -67,9 +68,11 @@ a {
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider theme={darkTheme}>
+        <GlobalStyle />
+        <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </>
   );
 }

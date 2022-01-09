@@ -1,8 +1,8 @@
-import { Helmet } from "react-helmet";
-import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { fetchCoins } from "../api";
+import { Helmet } from 'react-helmet';
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { fetchCoins } from '../api';
 
 const Container = styled.div`
   padding: 0 1rem;
@@ -21,19 +21,28 @@ const Header = styled.header`
   height: 10vh;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const Title = styled.h1`
   font-size: max(min(3rem, 40px), 20px);
   color: ${(props) => props.theme.accentColor};
+  font-weight: 600;
+`;
+
+const ToggleMode = styled.span`
+  font-size: max(min(3rem, 40px), 20px);
+  color: ${(props) => props.theme.accentColor2};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
-  background-color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.bgAccentColor2};
   color: ${(props) => props.theme.bgColor};
   border-radius: 1rem;
   margin-bottom: 0.5rem;
@@ -43,11 +52,11 @@ const Coin = styled.li`
     display: flex;
     align-items: center;
     padding: 1rem;
+    font-weight: 600;
   }
   &:hover {
     a {
       color: ${(props) => props.theme.accentColor2};
-      font-weight: 600;
     }
   }
 `;
@@ -71,7 +80,7 @@ interface CoinInterface {
 }
 
 function Coins() {
-  const { isLoading, data } = useQuery<CoinInterface[]>("allCoins", fetchCoins);
+  const { isLoading, data } = useQuery<CoinInterface[]>('allCoins', fetchCoins);
 
   return (
     <Container>
